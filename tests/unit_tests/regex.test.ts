@@ -7,7 +7,7 @@ describe('When I want to test my RGB value', () => {
         });
 
         it('And my RGB value is in the full HEX format without # character', async () => {
-            expect(isRGBColorValid("ff0000")).toBeTruthy();
+            expect(isRGBColorValid("FF0000")).toBeTruthy();
         });
 
         it('And my RGB value is in the less HEX format with # character', async () => {
