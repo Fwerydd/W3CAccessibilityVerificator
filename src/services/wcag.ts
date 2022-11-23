@@ -6,6 +6,14 @@ enum WCAGVersion {
     v2_1 = "2.1",
 }
 
+interface WCAGContrastAnswer {
+    wcagVersion: string,
+    value: number,
+    minimum: boolean,
+    enhanced: boolean,
+    isLargeText: boolean
+}
+
 class WCAGService {
     //#region Public
     public static checkWCAG(version: string) {
@@ -23,7 +31,7 @@ class WCAGService {
         textColor: string,
         textSize: number,
         textBold: boolean) {
-        const contrasts = [];
+        const contrasts: (WCAGContrastAnswer | undefined)[] = [];
 
         if (wcagVersion === WCAGVersion.v2_0) {
             contrasts.push(this.checkWCAG20TextContrast(textBackgroundColor, textColor, textSize, textBold));
@@ -71,7 +79,7 @@ class WCAGService {
         textSize: number,
         textBold: boolean,
         wcagVersion: string = WCAGVersion.v2_0
-    ) {
+    ): WCAGContrastAnswer | undefined {
         const isLargeText = (textSize >= 18) || (textSize === 14 && textBold);
 
         const textBackgroundColorRgb = colorStringGet(textBackgroundColor);
@@ -106,7 +114,7 @@ class WCAGService {
         textColor: string,
         textSize: number,
         textBold: boolean
-    ) {
+    ): WCAGContrastAnswer | undefined {
         return this.checkWCAG20TextContrast(
             textBackgroundColor,
             textColor,
