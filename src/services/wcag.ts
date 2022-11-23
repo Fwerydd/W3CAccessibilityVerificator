@@ -1,6 +1,7 @@
 import { get as colorStringGet } from 'color-string';
 
 enum WCAGVersion {
+    ALL = "*",
     v2_0 = "2.0",
     v2_1 = "2.1",
 }
@@ -25,17 +26,12 @@ class WCAGService {
         const contrasts = [];
 
         if (wcagVersion === WCAGVersion.v2_0) {
-            const textContrast = this.checkWCAG20TextContrast(wcagVersion, textBackgroundColor, textColor, textSize, textBold);
-            contrasts.push({
-                wcagVersion,
-                result: textContrast
-            });
+            contrasts.push(this.checkWCAG20TextContrast(textBackgroundColor, textColor, textSize, textBold));
         } else if (wcagVersion === WCAGVersion.v2_1) {
-            const textContrast = this.checkWCAG20TextContrast(wcagVersion, textBackgroundColor, textColor, textSize, textBold);
-            contrasts.push({
-                wcagVersion,
-                result: textContrast
-            });
+            contrasts.push(this.checkWCAG21TextContrast(textBackgroundColor, textColor, textSize, textBold));
+        } else if (wcagVersion === WCAGVersion.ALL) {
+            contrasts.push(this.checkWCAG20TextContrast(textBackgroundColor, textColor, textSize, textBold));
+            contrasts.push(this.checkWCAG21TextContrast(textBackgroundColor, textColor, textSize, textBold));
         }
 
         return {
@@ -44,7 +40,7 @@ class WCAGService {
             textColor,
             textSize,
             textBold
-        };;
+        };
     }
     //#endregion Public
 
@@ -70,11 +66,11 @@ class WCAGService {
 
     //#region Private WCAG 2.0
     private static checkWCAG20TextContrast(
-        wcagVersion: string,
         textBackgroundColor: string,
         textColor: string,
         textSize: number,
-        textBold: boolean
+        textBold: boolean,
+        wcagVersion: string = WCAGVersion.v2_0
     ) {
         const isLargeText = (textSize >= 18) || (textSize === 14 && textBold);
 
@@ -88,6 +84,7 @@ class WCAGService {
             const L2 = bkgLuminance > textLuminance ? textLuminance : bkgLuminance;
             const contrastRatio = (L1 + 0.05) / (L2 + 0.05); // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
             return {
+                wcagVersion,
                 value: contrastRatio,
                 minimum: isLargeText ? contrastRatio > 3 : contrastRatio > 4.5,
                 enhanced: isLargeText ? contrastRatio > 4.5 : contrastRatio > 7,
@@ -105,18 +102,17 @@ class WCAGService {
 
     //#region Private WCAG 2.1
     private static checkWCAG21TextContrast(
-        wcagVersion: string,
         textBackgroundColor: string,
         textColor: string,
         textSize: number,
         textBold: boolean
     ) {
         return this.checkWCAG20TextContrast(
-            wcagVersion,
             textBackgroundColor,
             textColor,
             textSize,
-            textBold
+            textBold,
+            WCAGVersion.v2_1
         );
     }
 
