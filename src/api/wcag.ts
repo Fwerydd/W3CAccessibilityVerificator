@@ -23,7 +23,16 @@ export default async (app: express.Application) => {
         (req: express.Request, res: express.Response) => {
             try {
                 validationResult(req).throw();
-                res.status(200).send();
+                res.status(200).send(
+                    {
+                        output: WCAGService.checkWCAGTextContrast(
+                            req.query.wcag_version as string,
+                            req.query.background_color as string,
+                            req.query.text_color as string,
+                            +(req.query.text_size as string),
+                            (req.query.text_bold as string) === 'true',
+                        )
+                    });
             } catch (err) {
                 res.status(400).json({ error: err });
             }
