@@ -1,0 +1,82 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/wcag/{wcag_version}/url/{url}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "wcag_version",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/wcag/text": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "wcag_version",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "background_color",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "text_color",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "text_size",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "text_bold",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
