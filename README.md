@@ -71,7 +71,7 @@ GET /doc
 
 Documentation served by [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express).
 
-#### Verify text contrast
+### Verify text contrast
 
 #### Request
 
@@ -98,7 +98,7 @@ Content-Length: 2
 }
 ```
 
-#### Verify texts contrasts in a website
+### Verify texts contrasts in a website
 
 #### Request
 
