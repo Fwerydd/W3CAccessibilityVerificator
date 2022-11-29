@@ -67,18 +67,20 @@ GET /doc
   curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/doc
 ```
 
-#### Response
+##### Response
 
 Documentation served by [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express).
 
 #### Verify text contrast
+
+#### Request
 
 ```sh
 GET /doc
   curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/api/wcag/text
 ```
 
-#### Response
+##### Response
 ```sh
 HTTP/1.1 200 OK
 Date: Thu, 24 Feb 2011 12:36:30 GMT
