@@ -7,17 +7,15 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
-    "rootDir": "src/doc",
+    "rootDir": "src",
     "outDir": "dist/doc",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "resolveJsonModule": true
   },
   "include": [
-    "src/doc/**/*"
+    "src/doc/**/*",
+    "src/services/**/*"
   ],
   "exclude": [
     "node_modules",

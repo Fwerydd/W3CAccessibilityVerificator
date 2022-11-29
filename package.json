@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "pregenerate_doc": "npx tsc -p tsconfig.doc.json",
-    "generate_doc": "node dist/doc/swagger.js",
+    "generate_doc": "node dist/doc/doc/swagger.js",
     "prebuild": "npm run generate_doc && tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",

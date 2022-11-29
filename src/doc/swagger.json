@@ -61,11 +61,41 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "WCAG distinguishable contrasts results",
+            "schema": {
+              "$ref": "#/definitions/WCAGContrastAnswer"
+            }
           },
           "400": {
             "description": "Bad Request"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WCAGContrastAnswer": {
+      "type": "object",
+      "properties": {
+        "wcagVersion": {
+          "type": "string",
+          "example": "2.0"
+        },
+        "value": {
+          "type": "number",
+          "example": 21
+        },
+        "minimum": {
+          "type": "boolean",
+          "example": true
+        },
+        "enhanced": {
+          "type": "boolean",
+          "example": false
+        },
+        "isLargeText": {
+          "type": "boolean",
+          "example": false
         }
       }
     }

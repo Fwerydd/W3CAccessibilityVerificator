@@ -45,6 +45,10 @@ export default async (app: express.Application) => {
                     type: "string",
                     enum: ["*", "2.0", "2.1"]
                 }
+                #swagger.responses[200] = {
+                    description: 'WCAG distinguishable contrasts results',
+                    schema: { $ref: '#/definitions/WCAGContrastAnswer' }
+                }
             */
             try {
                 validationResult(req).throw();
