@@ -1,7 +1,7 @@
 {
   "name": "w3caccessibilityverificator",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Allows users via an API to check against the Web Content Accessibility Guidelines published by the Web Accessibility Initiative of the World Wide Web Consortium",
   "main": "src/index.js",
   "scripts": {
     "pregenerate_doc": "npx tsc -p tsconfig.doc.json",
