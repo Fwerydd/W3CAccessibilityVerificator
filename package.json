@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "pregenerate_doc": "npx tsc -p tsconfig.doc.json",
+    "generate_doc": "node dist/doc/swagger.js",
+    "prebuild": "npm run generate_doc && tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
-    "postbuild": "node swagger.js",
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "watch": "nodemon src/index.ts",

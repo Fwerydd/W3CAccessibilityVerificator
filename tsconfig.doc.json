@@ -7,8 +7,8 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
-    "rootDir": "src",
-    "outDir": "dist",
+    "rootDir": "src/doc",
+    "outDir": "dist/doc",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -17,10 +17,9 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src/**/*"
+    "src/doc/**/*"
   ],
   "exclude": [
-    "src/doc",
     "node_modules",
     "tests"
   ]
