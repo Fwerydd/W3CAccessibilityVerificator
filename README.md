@@ -41,6 +41,48 @@ npm run coverage
 npm run generate_doc
 ```
 
+## API
+
+The API to this app is described below.
+
+### Documentation
+
+#### Request
+
+```sh
+GET /doc
+  curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/doc
+```
+
+#### Response
+
+Documentation served by [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express).
+
+#### Verify text contrast
+
+```sh
+GET /doc
+  curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/api/wcag/text
+```
+
+#### Response
+```sh
+HTTP/1.1 200 OK
+Date: Thu, 24 Feb 2011 12:36:30 GMT
+Status: 200 OK
+Connection: close
+Content-Type: application/json
+Content-Length: 2
+
+{
+  "wcagVersion": "2.0",
+  "value": 21,
+  "minimum": true,
+  "enhanced": false,
+  "isLargeText": false
+}
+```
+
 ## Author
 
 👤 **Fwerydd**
