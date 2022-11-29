@@ -13,7 +13,8 @@
     "watch": "nodemon src/index.ts",
     "pretest": "jest --clearCache",
     "test": "jest --forceExit --detectOpenHandles --verbose",
-    "coverage": "jest --silent --coverage"
+    "coverage": "jest --silent --coverage",
+    "precommit": "npm run test && npm run build"
   },
   "keywords": [],
   "author": "",
