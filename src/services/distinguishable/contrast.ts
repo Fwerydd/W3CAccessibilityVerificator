@@ -1,6 +1,7 @@
 import { get as colorStringGet } from 'color-string';
+import { WCAGContrastInput } from '../../models/wcag/contrast_input';
 
-import { IWCAGComputation } from '../wcag_interface';
+import { IWCAGComputation, WCAGVersion } from '../wcag_interface';
 
 export interface WCAGContrastAnswer {
     wcagVersion: string,
@@ -10,24 +11,16 @@ export interface WCAGContrastAnswer {
     isLargeText: boolean
 }
 
-interface WCAGContrastInput {
-    textBackgroundColor: string,
-    textColor: string,
-    textSize: number,
-    textBold: boolean,
-    wcagVersion: string
-}
-
 export class WCAGDistinguishableContrast extends IWCAGComputation {
-    public computation20(input: any): any {
-        return this.computation(input);
+    public computation20(input: any, wcagVersion: WCAGVersion): any {
+        return this.computation(input, wcagVersion);
     }
 
-    public computation21(input: any): any {
-        return this.computation(input);
+    public computation21(input: any, wcagVersion: WCAGVersion): any {
+        return this.computation(input, wcagVersion);
     }
 
-    public computation(input: any): WCAGContrastAnswer | undefined {
+    public computation(input: any, wcagVersion: WCAGVersion): WCAGContrastAnswer | undefined {
         const inputFormatted = input as WCAGContrastInput;
 
         const isLargeText = (inputFormatted.textSize >= 18) || (inputFormatted.textSize === 14 && inputFormatted.textBold);
@@ -42,7 +35,7 @@ export class WCAGDistinguishableContrast extends IWCAGComputation {
             const L2 = bkgLuminance > textLuminance ? textLuminance : bkgLuminance;
             const contrastRatio = (L1 + 0.05) / (L2 + 0.05); // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
             return {
-                wcagVersion: inputFormatted.wcagVersion,
+                wcagVersion,
                 value: contrastRatio,
                 minimum: isLargeText ? contrastRatio > 3 : contrastRatio > 4.5,
                 enhanced: isLargeText ? contrastRatio > 4.5 : contrastRatio > 7,

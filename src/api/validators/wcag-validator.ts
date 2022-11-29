@@ -1,7 +1,25 @@
 import { Location, Schema } from 'express-validator';
 
-import { WCAGVersion } from '../../services/wcag';
+import { WCAGVersion } from '../../services/wcag_interface';
 import { textIsColorValid } from '../../utils/regex';
+
+const wcagWebsiteValidateSchema: Schema = {
+    website_url: {
+        in: "query" as Location,
+        isURL: true
+    },
+    webdriver_url: {
+        in: "query" as Location
+    },
+    wcag_version: {
+        in: "query" as Location,
+        isIn: {
+            options: [Object.values(WCAGVersion)],
+            errorMessage: "Invalid WCAG version"
+        },
+        trim: true
+    }
+};
 
 const wcagTextValidateSchema: Schema = {
     background_color: {
@@ -42,4 +60,4 @@ const wcagTextValidateSchema: Schema = {
     }
 };
 
-export { wcagTextValidateSchema };
+export { wcagTextValidateSchema, wcagWebsiteValidateSchema };

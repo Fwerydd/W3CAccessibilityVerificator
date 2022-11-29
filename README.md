@@ -98,6 +98,43 @@ Content-Length: 2
 }
 ```
 
+#### Verify texts contrasts in a website
+
+#### Request
+
+```sh
+GET /doc
+  curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/api/wcag/url?wcag_version=2.0&website_url=http://www.google.fr&webdriver_url=http://localhost:4444/wd/hub
+```
+
+##### Response
+```sh
+HTTP/1.1 200 OK
+Date: Thu, 24 Feb 2011 12:36:30 GMT
+Status: 200 OK
+Connection: close
+Content-Type: application/json
+Content-Length: 2
+
+[
+  {
+    "contrasts": [
+      {
+        "wcagVersion": "2.0",
+        "value": 21,
+        "minimum": true,
+        "enhanced": true,
+        "isLargeText": false
+      }
+    ],
+    "textBackgroundColor": "#FFF",
+    "textColor": "#000",
+    "textSize": 12,
+    "textBold": false
+  }
+]
+```
+
 ## Author
 
 👤 **Fwerydd**

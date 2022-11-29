@@ -1,20 +1,36 @@
 #!/usr/bin/node
 import path from 'path';
 import swaggerAutogen from 'swagger-autogen';
-
 import { WCAGContrastAnswer } from '../services/distinguishable/contrast';
 
-const wcagContrastAnswerExample: WCAGContrastAnswer = {
+import { WCAGTextContrastAnswer } from '../services/wcag';
+import { } from '../services/wcag';
+
+const wcagContrastAnswer: WCAGContrastAnswer = {
     wcagVersion: "2.0",
     value: 21,
     minimum: true,
-    enhanced: false,
+    enhanced: true,
     isLargeText: false
 }
 
+const wcagTextContrastAnswer: WCAGTextContrastAnswer = {
+    contrasts: [wcagContrastAnswer],
+    textBackgroundColor: "#FFF",
+    textColor: "#000",
+    textSize: 12,
+    textBold: false
+}
+
+const wcagTextContrastAnswerList: WCAGTextContrastAnswer[] = [
+    wcagTextContrastAnswer
+]
+
 const doc = {
     definitions: {
-        WCAGContrastAnswer: wcagContrastAnswerExample
+        WCAGContrastAnswer: wcagContrastAnswer,
+        WCAGTextContrastAnswer: wcagTextContrastAnswer,
+        WCAGTextContrastAnswerList: wcagTextContrastAnswerList
     }
 };
 const outputFile = './src/doc/swagger.json';

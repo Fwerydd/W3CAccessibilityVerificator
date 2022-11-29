@@ -11,6 +11,51 @@
     "http"
   ],
   "paths": {
+    "/api/wcag/url": {
+      "get": {
+        "summary": "Check WCAG directives to a website URL and return a report",
+        "description": "Based on the WCAG 2 Overview (https://www.w3.org/WAI/standards-guidelines/wcag/)",
+        "parameters": [
+          {
+            "name": "website_url",
+            "in": "query",
+            "description": "Indicates the website URL to test",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webdriver_url",
+            "in": "query",
+            "description": "Webdriver URL",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "wcag_version",
+            "in": "query",
+            "description": "Indicates the WCAG version to test",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "*",
+              "2.0",
+              "2.1"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WCAG distinguishable contrasts results",
+            "schema": {
+              "$ref": "#/definitions/WCAGTextContrastAnswerList"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/api/wcag/text": {
       "get": {
         "summary": "Check text contrast based on the WCAG norm",
@@ -63,7 +108,7 @@
           "200": {
             "description": "WCAG distinguishable contrasts results",
             "schema": {
-              "$ref": "#/definitions/WCAGContrastAnswer"
+              "$ref": "#/definitions/WCAGTextContrastAnswer"
             }
           },
           "400": {
@@ -91,11 +136,112 @@
         },
         "enhanced": {
           "type": "boolean",
-          "example": false
+          "example": true
         },
         "isLargeText": {
           "type": "boolean",
           "example": false
+        }
+      }
+    },
+    "WCAGTextContrastAnswer": {
+      "type": "object",
+      "properties": {
+        "contrasts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "wcagVersion": {
+                "type": "string",
+                "example": "2.0"
+              },
+              "value": {
+                "type": "number",
+                "example": 21
+              },
+              "minimum": {
+                "type": "boolean",
+                "example": true
+              },
+              "enhanced": {
+                "type": "boolean",
+                "example": true
+              },
+              "isLargeText": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          }
+        },
+        "textBackgroundColor": {
+          "type": "string",
+          "example": "#FFF"
+        },
+        "textColor": {
+          "type": "string",
+          "example": "#000"
+        },
+        "textSize": {
+          "type": "number",
+          "example": 12
+        },
+        "textBold": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "WCAGTextContrastAnswerList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "contrasts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "wcagVersion": {
+                  "type": "string",
+                  "example": "2.0"
+                },
+                "value": {
+                  "type": "number",
+                  "example": 21
+                },
+                "minimum": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "enhanced": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "isLargeText": {
+                  "type": "boolean",
+                  "example": false
+                }
+              }
+            }
+          },
+          "textBackgroundColor": {
+            "type": "string",
+            "example": "#FFF"
+          },
+          "textColor": {
+            "type": "string",
+            "example": "#000"
+          },
+          "textSize": {
+            "type": "number",
+            "example": 12
+          },
+          "textBold": {
+            "type": "boolean",
+            "example": false
+          }
         }
       }
     }

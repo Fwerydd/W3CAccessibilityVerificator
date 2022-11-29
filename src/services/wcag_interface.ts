@@ -1,6 +1,6 @@
 export abstract class IWCAGComputation {
-    abstract computation20(input: any): any;
-    abstract computation21(input: any): any;
+    abstract computation20(input: any, wcagVersion: WCAGVersion): any;
+    abstract computation21(input: any, wcagVersion: WCAGVersion): any;
 }
 
 export enum WCAGVersion {

@@ -1,10 +1,61 @@
 import { checkSchema, validationResult } from 'express-validator';
 import express from 'express';
 
-import { wcagTextValidateSchema } from './validators/wcag-validator';
+import { wcagTextValidateSchema, wcagWebsiteValidateSchema } from './validators/wcag-validator';
 import { WCAGService } from '../services/wcag'
+import { WebsiteScrapping } from '../services/website_scrapping'
 
 export default async (app: express.Application) => {
+    app.get(
+        '/api/wcag/url',
+        checkSchema(wcagWebsiteValidateSchema),
+        async (req: express.Request, res: express.Response) => {
+            /*
+                #swagger.summary = 'Check WCAG directives to a website URL and return a report'
+                #swagger.description = 'Based on the WCAG 2 Overview (https://www.w3.org/WAI/standards-guidelines/wcag/)'
+                #swagger.parameters['wcag_version'] = {
+                    in: "query",
+                    description: "Indicates the WCAG version to test",
+                    required: true,
+                    type: "string",
+                    enum: ["*", "2.0", "2.1"]
+                }
+                #swagger.parameters['website_url'] = {
+                    in: "query",
+                    description: "Indicates the website URL to test",
+                    required: true,
+                    type: "string"
+                }
+                #swagger.parameters['webdriver_url'] = {
+                    in: "query",
+                    description: "Webdriver URL",
+                    required: true,
+                    type: "string"
+                }
+                #swagger.responses[200] = {
+                    description: 'WCAG distinguishable contrasts results',
+                    schema: { $ref: '#/definitions/WCAGTextContrastAnswerList' }
+                }
+            */
+            try {
+                validationResult(req).throw();
+                const textElements = await WebsiteScrapping.scrapTexts(req.query.website_url as string, req.query.webdriver_url as string);
+                const results = [];
+                for (const textElement of textElements) {
+                    results.push(WCAGService.checkWCAGTextContrast(
+                        req.query.wcag_version as string,
+                        textElement.textBackgroundColor,
+                        textElement.textColor,
+                        textElement.textSize,
+                        textElement.textBold
+                    ))
+                }
+                res.status(200).send({ output: results });
+            } catch (err) {
+                res.status(400).json({ error: err });
+            }
+        });
+
     app.get(
         '/api/wcag/text',
         checkSchema(wcagTextValidateSchema),
@@ -47,7 +98,7 @@ export default async (app: express.Application) => {
                 }
                 #swagger.responses[200] = {
                     description: 'WCAG distinguishable contrasts results',
-                    schema: { $ref: '#/definitions/WCAGContrastAnswer' }
+                    schema: { $ref: '#/definitions/WCAGTextContrastAnswer' }
                 }
             */
             try {
