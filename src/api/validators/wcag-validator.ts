@@ -1,7 +1,7 @@
 import { Location, Schema } from 'express-validator';
 
 import { WCAGVersion } from '../../services/wcag';
-import { isRGBColorValid } from '../../utils/regex';
+import { textIsColorValid } from '../../utils/regex';
 
 const wcagTextValidateSchema: Schema = {
     background_color: {
@@ -9,7 +9,7 @@ const wcagTextValidateSchema: Schema = {
         isString: true,
         custom: {
             options: (value, { req, location, path }) => {
-                return isRGBColorValid(value);
+                return textIsColorValid(value);
             },
         }
     },
@@ -23,7 +23,7 @@ const wcagTextValidateSchema: Schema = {
         isString: true,
         custom: {
             options: (value, { req, location, path }) => {
-                return isRGBColorValid(value);
+                return textIsColorValid(value);
             },
         }
     },

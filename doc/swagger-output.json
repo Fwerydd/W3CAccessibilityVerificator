@@ -13,37 +13,58 @@
   "paths": {
     "/api/wcag/text": {
       "get": {
-        "description": "",
+        "summary": "Check text contrast based on the WCAG norm",
+        "description": "Based on the Contrast subsection the Distinguishable section of the WCAG 2 Overview (https://www.w3.org/WAI/standards-guidelines/wcag/)",
         "parameters": [
           {
             "name": "wcag_version",
             "in": "query",
-            "type": "string"
+            "description": "Indicates the WCAG version to test",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "*",
+              "2.0",
+              "2.1"
+            ]
           },
           {
             "name": "background_color",
             "in": "query",
-            "type": "string"
+            "description": "Background color (HEX, RGB, RGBA, HSL & HSLA)",
+            "required": true,
+            "type": "string",
+            "pattern": "/^(#?([(a-f|A-F)d]{3,4}|[(a-f|A-F)d]{6}|[(a-f|A-F)d]{8})|rgb((0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d))|rgba((0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|0?.d|1(.0)?))|hsl((0|360|35d|3[0-4]d|[12]dd|0?d?d),(0|100|d{1,2})%,(0|100|d{1,2})%)|hsla((0|360|35d|3[0-4]d|[12]dd|0?d?d),(0|100|d{1,2})%,(0|100|d{1,2})%,(0?.d|1(.0)?)))$/"
           },
           {
             "name": "text_color",
             "in": "query",
-            "type": "string"
+            "description": "Text color (HEX, RGB, RGBA, HSL & HSLA)",
+            "required": true,
+            "type": "string",
+            "pattern": "/^(#?([(a-f|A-F)d]{3,4}|[(a-f|A-F)d]{6}|[(a-f|A-F)d]{8})|rgb((0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d))|rgba((0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|255|25[0-4]|2[0-4]d|1dd|0?d?d),(0|0?.d|1(.0)?))|hsl((0|360|35d|3[0-4]d|[12]dd|0?d?d),(0|100|d{1,2})%,(0|100|d{1,2})%)|hsla((0|360|35d|3[0-4]d|[12]dd|0?d?d),(0|100|d{1,2})%,(0|100|d{1,2})%,(0?.d|1(.0)?)))$/"
           },
           {
             "name": "text_size",
             "in": "query",
-            "type": "string"
+            "description": "Indicates the text size in points",
+            "required": true,
+            "type": "number"
           },
           {
             "name": "text_bold",
             "in": "query",
-            "type": "string"
+            "description": "Indicates if the text is in bold",
+            "required": true,
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully obtained.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "400": {
             "description": "Bad Request"
