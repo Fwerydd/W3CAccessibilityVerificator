@@ -11,33 +11,6 @@
     "http"
   ],
   "paths": {
-    "/api/wcag/{wcag_version}/url/{url}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "wcag_version",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "url",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
     "/api/wcag/text": {
       "get": {
         "description": "",

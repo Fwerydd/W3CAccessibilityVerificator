@@ -46,7 +46,7 @@ export class WCAGDistinguishableContrast extends IWCAGComputation {
                 value: contrastRatio,
                 minimum: isLargeText ? contrastRatio > 3 : contrastRatio > 4.5,
                 enhanced: isLargeText ? contrastRatio > 4.5 : contrastRatio > 7,
-                isLargeText: isLargeText
+                isLargeText
             };
         }
         return undefined;
