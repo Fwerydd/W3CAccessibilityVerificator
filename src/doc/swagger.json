@@ -61,10 +61,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User successfully obtained.",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
