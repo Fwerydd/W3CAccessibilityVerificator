@@ -76,8 +76,8 @@ Documentation served by [swagger-ui-express](https://www.npmjs.com/package/swagg
 #### Request
 
 ```sh
-GET /doc
-  curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/api/wcag/text
+GET /api/wcag/text
+  http://localhost:ENV.PORT/api/wcag/text?wcag_version=2.0&background_color=%23fff&text_bold=false&text_color=%23f70707&text_size=18
 ```
 
 ##### Response
@@ -103,8 +103,8 @@ Content-Length: 2
 #### Request
 
 ```sh
-GET /doc
-  curl -i -H 'Accept: application/json' http://localhost:ENV.PORT/api/wcag/url?wcag_version=2.0&website_url=http://www.google.fr&webdriver_url=http://localhost:4444/wd/hub
+GET /api/wcag/url
+  http://localhost:ENV.PORT/api/wcag/url?wcag_version=2.0&website_url=http://www.google.fr&webdriver_url=http://localhost:4444/wd/hub
 ```
 
 ##### Response
