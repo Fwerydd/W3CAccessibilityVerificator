@@ -17,6 +17,19 @@
 npm install
 ```
 
+## Configuration
+
+Before using the usage section, you have to:
+- Go to the src/config folder
+- Rename or move the .env_example file to .env
+- Fill the .env with your environmental variables values
+
+```sh
+cd src/config
+mv .env_example .env
+```
+
+
 ## Usage
 
 ```sh
